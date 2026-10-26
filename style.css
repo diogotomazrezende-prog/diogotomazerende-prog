@@ -1,0 +1,318 @@
+
+/* ========================================
+   BOLETIM DIGITAL - ESTILOS GERAIS
+   ======================================== */
+
+:root {
+  --roxo: #7c3aed;
+  --roxo-escuro: #5b21b6;
+  --azul: #2563eb;
+  --azul-claro: #dbeafe;
+  --lilas-claro: #ede9fe;
+  --fundo: #f7f8fc;
+  --texto: #1f2937;
+  --texto-suave: #64748b;
+  --branco: #ffffff;
+  --borda: #e5e7eb;
+  --verde: #166534;
+  --verde-fundo: #dcfce7;
+  --laranja: #9a3412;
+  --laranja-fundo: #ffedd5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.6;
+}
+
+.container {
+  width: min(1180px, 92%);
+  margin: 0 auto;
+}
+
+/* ========================================
+   CABEÇALHO
+   ======================================== */
+
+.cabecalho {
+  background: linear-gradient(135deg, #6d28d9, #7c3aed, #2563eb);
+  color: var(--branco);
+  padding: 36px 0 30px;
+}
+
+.identificacao {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  opacity: 0.9;
+}
+
+.cabecalho h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.2;
+}
+
+.subtitulo {
+  margin: 10px 0 22px;
+  color: #ede9fe;
+}
+
+.informacoes-estudante {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid rgb(255 255 255 / 25%);
+}
+
+.serie {
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 18%);
+  font-weight: bold;
+}
+
+/* ========================================
+   SEÇÕES
+   ======================================== */
+
+main.container {
+  padding-top: 32px;
+  padding-bottom: 24px;
+}
+
+.secao-resumo,
+.secao-notas {
+  margin-bottom: 36px;
+}
+
+.secao-resumo h2,
+.secao-notas h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.descricao {
+  margin: 5px 0 22px;
+  color: var(--texto-suave);
+}
+
+/* ========================================
+   CARDS DE RESUMO
+   ======================================== */
+
+.grade-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  min-width: 0;
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid transparent;
+  box-shadow: 0 5px 16px rgb(31 41 55 / 5%);
+}
+
+.card-roxo {
+  background: #ede9fe;
+  border-color: #ddd6fe;
+}
+
+.card-azul {
+  background: #dbeafe;
+  border-color: #bfdbfe;
+}
+
+.card-lilas {
+  background: #f3e8ff;
+  border-color: #e9d5ff;
+}
+
+.card-azul-claro {
+  background: #e0f2fe;
+  border-color: #bae6fd;
+}
+
+.card-frequencia {
+  background: #dcfce7;
+  border-color: #bbf7d0;
+}
+
+.card-titulo {
+  margin: 0;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.card-valor {
+  margin: 8px 0;
+  color: var(--roxo-escuro);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.card-frequencia .card-valor {
+  color: var(--verde);
+}
+
+.card-detalhe {
+  margin: 0;
+  color: #475569;
+  font-size: 0.82rem;
+}
+
+.aviso {
+  margin: 16px 0 0;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+
+/* ========================================
+   TABELA DE NOTAS
+   ======================================== */
+
+.tabela-responsiva {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  box-shadow: 0 5px 18px rgb(31 41 55 / 4%);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+thead {
+  background: #ede9fe;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--borda);
+  vertical-align: middle;
+}
+
+th {
+  color: #4c1d95;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+td {
+  font-size: 0.9rem;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: #f8f7ff;
+}
+
+td:first-child {
+  font-weight: bold;
+  min-width: 180px;
+}
+
+/* Etiquetas de situação que o JavaScript utilizará */
+
+.situacao {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.situacao-bom {
+  color: var(--verde);
+  background: var(--verde-fundo);
+}
+
+.situacao-atencao {
+  color: var(--laranja);
+  background: var(--laranja-fundo);
+}
+
+.situacao-indisponivel {
+  color: #475569;
+  background: #f1f5f9;
+}
+
+/* ========================================
+   RODAPÉ
+   ======================================== */
+
+.rodape {
+  padding: 20px 0;
+  border-top: 1px solid var(--borda);
+  color: var(--texto-suave);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+/* ========================================
+   ADAPTAÇÃO PARA CELULARES
+   ======================================== */
+
+@media (max-width: 800px) {
+  .grade-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  th,
+  td {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cabecalho {
+    padding: 28px 0 24px;
+  }
+
+  main.container {
+    padding-top: 24px;
+  }
+
+  .grade-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .informacoes-estudante {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .secao-resumo h2,
+  .secao-notas h2 {
+    font-size: 1.3rem;
+  }
+}
