@@ -1,12 +1,110 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <Link:css></Link:css>
-    <title>boletim 2026</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Boletim Digital | 8º Ano</title>
+
+  <!-- Arquivo responsável pelo visual -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Arquivo responsável pelos cálculos -->
+  <script src="script.js" defer></script>
 </head>
 <body>
-    
+  <header class="cabecalho">
+    <div class="container">
+      <p class="identificacao">ÁREA DO ESTUDANTE</p>
+      <h1>Boletim Digital</h1>
+      <p class="subtitulo">Acompanhe seu desempenho escolar</p>
+
+      <div class="informacoes-estudante">
+        <span>Estudante: Estudante Exemplo</span>
+        <span class="serie">8º Ano</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="secao-resumo" aria-labelledby="titulo-resumo">
+      <h2 id="titulo-resumo">Resumo do desempenho</h2>
+      <p class="descricao">
+        Confira um resumo das suas informações escolares.
+      </p>
+
+      <!-- O JavaScript preencherá os valores destes cards -->
+      <div class="grade-cards">
+        <article class="card card-roxo">
+          <p class="card-titulo">Média geral</p>
+          <p class="card-valor" id="media-geral">—</p>
+          <p class="card-detalhe">Notas disponíveis</p>
+        </article>
+
+        <article class="card card-azul">
+          <p class="card-titulo">Total de faltas</p>
+          <p class="card-valor" id="total-faltas">—</p>
+          <p class="card-detalhe">Faltas registradas</p>
+        </article>
+
+        <article class="card card-lilas">
+          <p class="card-titulo">Bom desempenho</p>
+          <p class="card-valor" id="total-bom-desempenho">—</p>
+          <p class="card-detalhe">Disciplinas com média a partir de 6,0</p>
+        </article>
+
+        <article class="card card-azul-claro">
+          <p class="card-titulo">Precisam de atenção</p>
+          <p class="card-valor" id="total-atencao">—</p>
+          <p class="card-detalhe">Disciplinas com média abaixo de 6,0</p>
+        </article>
+
+        <article class="card card-frequencia">
+          <p class="card-titulo">Frequência demonstrativa</p>
+          <p class="card-valor">92%</p>
+          <p class="card-detalhe">Frequência adequada</p>
+        </article>
+      </div>
+
+      <p class="aviso">
+        Dados fictícios para fins de aprendizagem.
+        A frequência é apenas demonstrativa.
+      </p>
+    </section>
+
+    <section class="secao-notas" aria-labelledby="titulo-notas">
+      <h2 id="titulo-notas">Notas por disciplina</h2>
+      <p class="descricao">
+        As notas estão na escala de 0 a 10.
+      </p>
+
+      <!-- A tabela será preenchida pelo JavaScript -->
+      <div class="tabela-responsiva">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Disciplina</th>
+              <th scope="col">1º Tri</th>
+              <th scope="col">2º Tri</th>
+              <th scope="col">3º Tri</th>
+              <th scope="col">Média</th>
+              <th scope="col">Faltas</th>
+              <th scope="col">Situação</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela">
+            <tr>
+              <td colspan="7">Carregando dados fictícios...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="rodape">
+      <p>Boletim Digital · Projeto educativo · 8º Ano</p>
+    </footer>
+  </main>
 </body>
 </html>
