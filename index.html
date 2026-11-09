@@ -1,5 +1,5 @@
 
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -10,7 +10,10 @@
   <!-- Arquivo responsável pelo visual -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Arquivo responsável pelos cálculos -->
+  <!-- Biblioteca Chart.js para gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Arquivo responsável pelos cálculos e API -->
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -21,86 +24,183 @@
       <p class="subtitulo">Acompanhe seu desempenho escolar</p>
 
       <div class="informacoes-estudante">
-        <span>Estudante: Estudante Exemplo</span>
+        <span>Estudante: 8B - Nº 8</span>
         <span class="serie">8º Ano</span>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="secao-resumo" aria-labelledby="titulo-resumo">
-      <h2 id="titulo-resumo">Resumo do desempenho</h2>
-      <p class="descricao">
-        Confira um resumo das suas informações escolares.
-      </p>
+    <!-- TELA DE LOGIN / ACESSO POR PIN -->
+    <section id="secao-login" class="secao-login">
+      <h2>Acesso ao Boletim</h2>
+      <p class="descricao">Informe seu PIN de acesso para visualizar e alterar seu boletim.</p>
+      
+      <div class="card-login">
+        <div class="info-fixa-estudante">
+          <p><strong>Turma:</strong> 8B</p>
+          <p><strong>Número de chamada:</strong> 8</p>
+        </div>
 
-      <!-- O JavaScript preencherá os valores destes cards -->
-      <div class="grade-cards">
-        <article class="card card-roxo">
-          <p class="card-titulo">Média geral</p>
-          <p class="card-valor" id="media-geral">—</p>
-          <p class="card-detalhe">Notas disponíveis</p>
-        </article>
+        <form id="form-login" onsubmit="return false;">
+          <div class="campo-grupo">
+            <label for="campo-pin">PIN de acesso:</label>
+            <input type="password" id="campo-pin" placeholder="Digite seu PIN" autocomplete="off" required>
+          </div>
 
-        <article class="card card-azul">
-          <p class="card-titulo">Total de faltas</p>
-          <p class="card-valor" id="total-faltas">—</p>
-          <p class="card-detalhe">Faltas registradas</p>
-        </article>
+          <button type="button" id="btn-entrar" class="btn-acao">Entrar</button>
+        </form>
 
-        <article class="card card-lilas">
-          <p class="card-titulo">Bom desempenho</p>
-          <p class="card-valor" id="total-bom-desempenho">—</p>
-          <p class="card-detalhe">Disciplinas com média a partir de 6,0</p>
-        </article>
-
-        <article class="card card-azul-claro">
-          <p class="card-titulo">Precisam de atenção</p>
-          <p class="card-valor" id="total-atencao">—</p>
-          <p class="card-detalhe">Disciplinas com média abaixo de 6,0</p>
-        </article>
-
-        <article class="card card-frequencia">
-          <p class="card-titulo">Frequência demonstrativa</p>
-          <p class="card-valor">92%</p>
-          <p class="card-detalhe">Frequência adequada</p>
-        </article>
-      </div>
-
-      <p class="aviso">
-        Dados fictícios para fins de aprendizagem.
-        A frequência é apenas demonstrativa.
-      </p>
-    </section>
-
-    <section class="secao-notas" aria-labelledby="titulo-notas">
-      <h2 id="titulo-notas">Notas por disciplina</h2>
-      <p class="descricao">
-        As notas estão na escala de 0 a 10.
-      </p>
-
-      <!-- A tabela será preenchida pelo JavaScript -->
-      <div class="tabela-responsiva">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Disciplina</th>
-              <th scope="col">1º Tri</th>
-              <th scope="col">2º Tri</th>
-              <th scope="col">3º Tri</th>
-              <th scope="col">Média</th>
-              <th scope="col">Faltas</th>
-              <th scope="col">Situação</th>
-            </tr>
-          </thead>
-          <tbody id="corpo-tabela">
-            <tr>
-              <td colspan="7">Carregando dados fictícios...</td>
-            </tr>
-          </tbody>
-        </table>
+        <p id="mensagem-login" class="mensagem-status" aria-live="polite"></p>
       </div>
     </section>
+
+    <!-- CONTEÚDO DO BOLETIM (OCULTO ATÉ REALIZAR LOGIN) -->
+    <div id="conteudo-boletim" style="display: none;">
+      <section class="secao-resumo" aria-labelledby="titulo-resumo">
+        <h2 id="titulo-resumo">Resumo do desempenho</h2>
+        <p class="descricao">
+          Confira um resumo das suas informações escolares.
+        </p>
+
+        <!-- O JavaScript preencherá os valores destes cards -->
+        <div class="grade-cards">
+          <article class="card card-roxo">
+            <p class="card-titulo">Média geral</p>
+            <p class="card-valor" id="media-geral">—</p>
+            <p class="card-detalhe">Notas disponíveis</p>
+          </article>
+
+          <article class="card card-azul">
+            <p class="card-titulo">Total de faltas</p>
+            <p class="card-valor" id="total-faltas">—</p>
+            <p class="card-detalhe">Faltas registradas</p>
+          </article>
+
+          <article class="card card-lilas">
+            <p class="card-titulo">Bom desempenho</p>
+            <p class="card-valor" id="total-bom-desempenho">—</p>
+            <p class="card-detalhe">Disciplinas com média a partir de 6,0</p>
+          </article>
+
+          <article class="card card-azul-claro">
+            <p class="card-titulo">Precisam de atenção</p>
+            <p class="card-valor" id="total-atencao">—</p>
+            <p class="card-detalhe">Disciplinas com média abaixo de 6,0</p>
+          </article>
+
+          <article class="card card-frequencia">
+            <p class="card-titulo">Frequência demonstrativa</p>
+            <p class="card-valor">92%</p>
+            <p class="card-detalhe">Frequência adequada</p>
+          </article>
+        </div>
+
+        <p class="aviso">
+          Dados fictícios para fins de aprendizagem.
+          A frequência é apenas demonstrativa.
+        </p>
+      </section>
+
+      <!-- ÁREA DE GRÁFICOS DO DESEMPENHO -->
+      <section class="secao-graficos" aria-labelledby="titulo-graficos">
+        <h2 id="titulo-graficos">Visualização gráfica</h2>
+        <p class="descricao">Acompanhe seus dados em gráficos detalhados.</p>
+
+        <div class="area-graficos">
+          <article class="grafico-card">
+            <h3 class="grafico-titulo">Média por disciplina</h3>
+            <div class="grafico-container">
+              <canvas id="graficoMediasDisciplinas"></canvas>
+            </div>
+          </article>
+
+          <article class="grafico-card">
+            <h3 class="grafico-titulo">Evolução da média geral</h3>
+            <div class="grafico-container">
+              <canvas id="graficoEvolucaoTrimestres"></canvas>
+            </div>
+          </article>
+
+          <article class="grafico-card" id="card-grafico-faltas">
+            <div class="cabecalho-card-faltas">
+              <h3 class="grafico-titulo">Faltas por trimestre</h3>
+              <span id="badge-perigo" class="badge-perigo" style="display: none;">Perigo</span>
+            </div>
+            <div class="grafico-container">
+              <canvas id="graficoFaltasTrimestres"></canvas>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="secao-notas" aria-labelledby="titulo-notas">
+        <div class="cabecalho-secao-notas">
+          <div>
+            <h2 id="titulo-notas">Notas por disciplina</h2>
+            <p class="descricao">
+              As notas estão na escala de 0 a 10.
+            </p>
+          </div>
+          <button type="button" id="btn-alterar-dados" class="btn-acao">Alterar dados</button>
+        </div>
+
+        <!-- A tabela será preenchida pelo JavaScript -->
+        <div class="tabela-responsiva">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Disciplina</th>
+                <th scope="col">1º Tri</th>
+                <th scope="col">2º Tri</th>
+                <th scope="col">3º Tri</th>
+                <th scope="col">Média</th>
+                <th scope="col">Faltas</th>
+                <th scope="col">Situação</th>
+              </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+              <tr>
+                <td colspan="7">Aguardando autenticação...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ÁREA DE EDIÇÃO DAS NOTAS E FALTAS -->
+      <section id="secao-edicao" class="secao-edicao" style="display: none;">
+        <h2>Editar Notas e Faltas</h2>
+        <p class="descricao">Altere os valores desejados. Deixe a nota em branco se ainda não foi lançada.</p>
+
+        <form id="form-edicao" onsubmit="return false;">
+          <div class="tabela-responsiva">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Disciplina</th>
+                  <th scope="col">Nota 1º Tri</th>
+                  <th scope="col">Nota 2º Tri</th>
+                  <th scope="col">Nota 3º Tri</th>
+                  <th scope="col">Faltas 1º Tri</th>
+                  <th scope="col">Faltas 2º Tri</th>
+                  <th scope="col">Faltas 3º Tri</th>
+                </tr>
+              </thead>
+              <tbody id="corpo-tabela-edicao">
+              </tbody>
+            </table>
+          </div>
+
+          <p id="mensagem-edicao" class="mensagem-status" aria-live="polite"></p>
+
+          <div class="acoes-edicao">
+            <button type="button" id="btn-salvar" class="btn-acao">Salvar alterações</button>
+            <button type="button" id="btn-cancelar-edicao" class="btn-acao btn-secundario">Cancelar</button>
+          </div>
+        </form>
+      </section>
+    </div>
 
     <footer class="rodape">
       <p>Boletim Digital · Projeto educativo · 8º Ano</p>
