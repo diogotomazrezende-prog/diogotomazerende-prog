@@ -94,6 +94,7 @@ main.container {
 }
 
 .secao-resumo,
+.secao-graficos,
 .secao-notas,
 .secao-login,
 .secao-edicao {
@@ -101,6 +102,7 @@ main.container {
 }
 
 .secao-resumo h2,
+.secao-graficos h2,
 .secao-notas h2,
 .secao-login h2,
 .secao-edicao h2 {
@@ -317,6 +319,7 @@ td:first-child {
   }
 
   .secao-resumo h2,
+  .secao-graficos h2,
   .secao-notas h2 {
     font-size: 1.3rem;
   }
@@ -447,4 +450,89 @@ td:first-child {
 
 .mensagem-sucesso {
   color: var(--verde);
+}
+
+/* ========================================
+   ESTILOS DOS GRÁFICOS
+   ======================================== */
+
+.area-graficos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.grafico-card {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 5px 16px rgb(31 41 55 / 5%);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grafico-titulo {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+  color: var(--texto);
+}
+
+.cabecalho-card-faltas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.cabecalho-card-faltas .grafico-titulo {
+  margin: 0;
+}
+
+.badge-perigo {
+  background-color: var(--vermelho-erro);
+  color: var(--branco);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.card-perigo {
+  border-color: var(--vermelho-erro) !important;
+  box-shadow: 0 5px 18px rgb(220 38 38 / 15%) !important;
+}
+
+.grafico-container {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 320px;
+}
+
+@media (max-width: 1024px) {
+  .area-graficos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .area-graficos .grafico-card:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .area-graficos {
+    grid-template-columns: 1fr;
+  }
+
+  .area-graficos .grafico-card:last-child {
+    grid-column: span 1;
+  }
+
+  .grafico-container {
+    min-height: 280px;
+  }
 }
